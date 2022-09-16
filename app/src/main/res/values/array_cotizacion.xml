@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cotizaciones">
+        <item>Cotizaciones en Pesos Argentinos</item>
+        <item>Cotizaciones en Dolares</item>
+    </string-array>
+</resources>
