@@ -1,7 +1,10 @@
 package com.challengecrypto
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.challengecrypto.Adapters.MyAdapter
@@ -9,17 +12,25 @@ import com.challengecrypto.Fragments.ConfiguracionFragment
 import com.challengecrypto.Fragments.HomeFragment
 import com.challengecrypto.Fragments.MovimientosFragment
 import com.challengecrypto.Models.ExchangeInfo
+import com.challengecrypto.Models.ResponsePrice
 import com.challengecrypto.Models.SymbolCrypto
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.WebSocket
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
 
+
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,8 +64,45 @@ class MainActivity : AppCompatActivity() {
         }
         }.attach()
 
-        getDataApi()
-        getPriceCrypto()
+        val btnConnect: Button = findViewById(R.id.btn_connect)
+        val btnSend: Button = findViewById(R.id.btn_send)
+        val btnClose: Button = findViewById(R.id.btn_close)
+
+
+//
+        btnSend.setOnClickListener{
+            getCoinInfo()
+        }
+//        getResponse()
+//        getDataApi()
+//        getPriceCrypto()
+    }
+
+
+    private fun getResponse(){
+        CryptoDbClient.service.get24hrPriceStatistics().enqueue(object : Callback<List<ResponsePrice>>{
+            override fun onResponse(call: Call<List<ResponsePrice>>, response: Response<List<ResponsePrice>>) {
+                println("Call: "+call+"::  "+response.body().toString())
+            }
+
+            override fun onFailure(call: Call<List<ResponsePrice>>, t: Throwable) {
+                println("Error: $t")
+            }
+
+        })
+    }
+
+    private fun getCoinInfo(){
+        CryptoDbClient.service.getCoinInfo().enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                println("Call: "+call+"::  "+response.body().toString())
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                println("Error: $t")
+            }
+
+        })
     }
 
     private fun getDataApi(){
@@ -82,6 +130,7 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
 
 
 }
