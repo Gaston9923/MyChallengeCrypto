@@ -1,7 +1,9 @@
 package com.challengecrypto.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,8 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.challengecrypto.Adapters.CoinsRecyclerAdapter
+import com.challengecrypto.CoinsController
+import com.challengecrypto.CoinsCryptoInterface
 import com.challengecrypto.Models.CoinCrypto
 import com.challengecrypto.R
 import com.challengecrypto.WSListener
@@ -25,6 +29,8 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment() {
+    private val coinsController = CoinsController(this)
+    private val coinRecyclerAdapter = CoinsRecyclerAdapter(coinsController)
 
 
     override fun onCreateView(
@@ -34,13 +40,15 @@ class HomeFragment : Fragment() {
         val spinner:Spinner = view.findViewById(R.id.sp_cotizacion)
         val rvCoins: RecyclerView = view.findViewById(R.id.rv_coins)
 
+
+
         rvCoins.layoutManager = GridLayoutManager(this.requireContext(),1)
         rvCoins.setHasFixedSize(true)
         val coinList = mutableListOf<CoinCrypto>()
-        coinList.add(CoinCrypto("BTC","Bitcoin","40.454,85","+9.1%"))
-        coinList.add(CoinCrypto("BNB","BinanceCoin","280.01","+8.1%"))
-        val coinRecyclerAdapter = CoinsRecyclerAdapter(coinList)
+//        coinList.add(CoinCrypto("BTC","Bitcoin","40.454,85","+9.1%"))
+//        coinList.add(CoinCrypto("BNB","BinanceCoin","280.01","+8.1%"))
         rvCoins.adapter = coinRecyclerAdapter
+
 
         ArrayAdapter.createFromResource(context,R.array.cotizaciones,android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item)
@@ -65,27 +73,39 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun startWebSocket(){
         val client = OkHttpClient().newBuilder().writeTimeout(40, TimeUnit.SECONDS)
             .connectTimeout(40, TimeUnit.SECONDS).readTimeout(40, TimeUnit.SECONDS).build()
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/bnbbusd@trade"
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@trade"
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/!miniTicker@arr"
-        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker/" +
-                                                                "bnbbusd@miniTicker/" +
-                                                                "ethbusd@miniTicker/" +
-                                                                "lunabusd@miniTicker/" +
-                                                                "solbusd@miniTicker/" +
-                                                                "ltcbusd@miniTicker/" +
-                                                                "maticbusd@miniTicker/" +
-                                                                "avaxbusd@miniTicker/" +
-                                                                "xrpbusd@miniTicker/" +
-                                                                "busdusdt@miniTicker"
-        var wsListener = WSListener()
+//        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker/" +
+//                                                                "bnbbusd@miniTicker/" +
+//                                                                "ethbusd@miniTicker/" +
+//                                                                "lunabusd@miniTicker/" +
+//                                                                "solbusd@miniTicker/" +
+//                                                                "ltcbusd@miniTicker/" +
+//                                                                "maticbusd@miniTicker/" +
+//                                                                "avaxbusd@miniTicker/" +
+//                                                                "xrpbusd@miniTicker/" +
+//                                                                "busdusdt@miniTicker"
+        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker"
+        var wsListener = WSListener(this)
         var request: Request = Request.Builder().url(serverUrl).build()
         var webSocket: WebSocket = client.newWebSocket(request,wsListener)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateCoins(coin: CoinCrypto){
+
+        this.activity?.runOnUiThread {
+            coinsController.updateListCoin(coin)
+            coinRecyclerAdapter.notifyDataSetChanged()
+        }
+
+
+    }
 
 
 }

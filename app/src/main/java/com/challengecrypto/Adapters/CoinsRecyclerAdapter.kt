@@ -1,13 +1,18 @@
 package com.challengecrypto.Adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.challengecrypto.CoinsController
+import com.challengecrypto.CoinsCryptoInterface
 import com.challengecrypto.Models.CoinCrypto
 import com.challengecrypto.R
 
-class CoinsRecyclerAdapter(val coinsList:List<CoinCrypto>): RecyclerView.Adapter<CoinViewHolder>() {
+class CoinsRecyclerAdapter(coinsController: CoinsController): RecyclerView.Adapter<CoinViewHolder>() {
+
+    var listCoins = coinsController.listCoins
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,12 +20,19 @@ class CoinsRecyclerAdapter(val coinsList:List<CoinCrypto>): RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
-        val coin = coinsList[position]
+        val coin = listCoins[position]
         holder.render(coin)
     }
 
     override fun getItemCount(): Int{
-        println("Cantidad:"+coinsList.size)
-        return coinsList.size
+        println("Cantidad:"+listCoins.size)
+        return listCoins.size
     }
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    override fun updateCoinCrypto(list: MutableList<CoinCrypto>) {
+//        println("RvActualizado")
+//        listCoins = list
+//        this.notifyDataSetChanged()
+//    }
 }
