@@ -1,10 +1,10 @@
 package com.challengecrypto
 
-import com.challengecrypto.Models.ExchangeInfo
-import com.challengecrypto.Models.ResponsePrice
-import com.challengecrypto.Models.SymbolCrypto
+import com.challengecrypto.Models.*
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CryptoService {
 
@@ -18,7 +18,7 @@ interface CryptoService {
     fun getCoinInfo(): Call<String>
 
 
-    @GET("ticker/24hr")
-    fun get24hrPriceStatistics(): Call<List<ResponsePrice>>
+    @GET("ticker")
+    fun get24hrPriceStatistics(@Query("symbol")symbol: String): Call<Ticker>
 
 }

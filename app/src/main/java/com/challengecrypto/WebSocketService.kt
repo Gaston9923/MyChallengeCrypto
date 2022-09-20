@@ -1,16 +1,13 @@
 package com.challengecrypto
 
-import android.util.Log
 import com.challengecrypto.Fragments.HomeFragment
 import com.challengecrypto.Models.CoinCrypto
 import com.challengecrypto.Models.ResponseCoin
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
-import org.json.JSONObject
 
 
 class WSListener(homeFragment: HomeFragment) : WebSocketListener() {
@@ -30,7 +27,6 @@ class WSListener(homeFragment: HomeFragment) : WebSocketListener() {
         if (coin.s.equals("BTCUSDT")){
             var coinCrypto = CoinCrypto(coin.s,"Bitcoin",coin.c,"+9")
             hf.updateCoins(coinCrypto)
-//            coinsController.updateListCoin(coinCrypto)
         }
         println("Coin: "+coin )
         println("Lista: "+text)

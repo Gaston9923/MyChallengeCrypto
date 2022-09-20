@@ -1,13 +1,9 @@
 package com.challengecrypto.Adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.challengecrypto.CoinsController
-import com.challengecrypto.CoinsCryptoInterface
-import com.challengecrypto.Models.CoinCrypto
 import com.challengecrypto.R
 
 class CoinsRecyclerAdapter(coinsController: CoinsController): RecyclerView.Adapter<CoinViewHolder>() {
@@ -25,14 +21,8 @@ class CoinsRecyclerAdapter(coinsController: CoinsController): RecyclerView.Adapt
     }
 
     override fun getItemCount(): Int{
-        println("Cantidad:"+listCoins.size)
         return listCoins.size
     }
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    override fun updateCoinCrypto(list: MutableList<CoinCrypto>) {
-//        println("RvActualizado")
-//        listCoins = list
-//        this.notifyDataSetChanged()
-//    }
+
 }
