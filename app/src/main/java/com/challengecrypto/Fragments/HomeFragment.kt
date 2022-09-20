@@ -46,7 +46,7 @@ class HomeFragment() : Fragment() {
         val view:View = inflater.inflate(R.layout.fragment_home, container, false)
         val spinner:Spinner = view.findViewById(R.id.sp_cotizacion)
         val rvCoins: RecyclerView = view.findViewById(R.id.rv_coins)
-        getResponse24Statistics()
+//        getResponse24Statistics()
 
         rvCoins.layoutManager = GridLayoutManager(this.requireContext(),1)
         rvCoins.setHasFixedSize(true)
@@ -94,6 +94,8 @@ class HomeFragment() : Fragment() {
         val client = OkHttpClient().newBuilder().writeTimeout(40, TimeUnit.SECONDS)
             .connectTimeout(40, TimeUnit.SECONDS).readTimeout(40, TimeUnit.SECONDS).build()
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@trade"
+          val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@ticker/bnbusdt@ticker/ethusdt@ticker/lunausdt@ticker/solusdt@ticker/ltcusdt@ticker/maticusdt@ticker/avaxusdt@ticker/xrpusdt@ticker/busdusdt@ticker"
+
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/!miniTicker@arr"
 //        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker/" +
 //                                                                "bnbbusd@miniTicker/" +
@@ -105,7 +107,7 @@ class HomeFragment() : Fragment() {
 //                                                                "avaxbusd@miniTicker/" +
 //                                                                "xrpbusd@miniTicker/" +
 //                                                                "busdusdt@miniTicker"
-        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker"
+//        val serverUrl:String = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker"
         var wsListener = WSListener(this)
         var request: Request = Request.Builder().url(serverUrl).build()
         var webSocket: WebSocket = client.newWebSocket(request,wsListener)
@@ -119,7 +121,7 @@ class HomeFragment() : Fragment() {
         }
         val roundOff = String.format("%.4f",price)
         coin.price = roundOff
-        coin.percentage = "$priceChangePercentage%"
+//        coin.percentage = "$priceChangePercentage%"
         this.activity?.runOnUiThread {
             coinsController.updateListCoin(coin)
             coinRecyclerAdapter.notifyDataSetChanged()
