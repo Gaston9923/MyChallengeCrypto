@@ -1,6 +1,9 @@
 package com.challengecrypto.Adapters
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,7 +27,7 @@ class CoinViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvPercentage.text = coin.percentage
         ivIcon.setImageResource(coin.icon)
 
-//        setIconsCoin(coin)
+        setIconsCoin(coin)
         roundPercentageCoin(coin)
         }
 
@@ -46,34 +49,34 @@ class CoinViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setIconsCoin(coin: CoinCrypto){
         when(coin.symbol){
             "BTC"->{
-                ivIcon.setImageResource(R.drawable.bitcoin_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#FFCCBC"), PorterDuff.Mode.SRC_ATOP)
             }
             "ETH"->{
-                ivIcon.setImageResource(R.drawable.ethereum_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#D1C4E9"), PorterDuff.Mode.SRC_ATOP)
             }
             "BNB"->{
-                ivIcon.setImageResource(R.drawable.bnb_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#F0F4C3"), PorterDuff.Mode.SRC_ATOP)
             }
             "LUNA"->{
-                ivIcon.setImageResource(R.drawable.terra_luna_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#BBDEFB"), PorterDuff.Mode.SRC_ATOP)
             }
             "SOL"->{
-                ivIcon.setImageResource(R.drawable.solana_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#D1C4E9"), PorterDuff.Mode.SRC_ATOP)
             }
             "LTC"->{
-                ivIcon.setImageResource(R.drawable.litecoin_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#CFCFCF"), PorterDuff.Mode.SRC_ATOP)
             }
             "MATIC"->{
-                ivIcon.setImageResource(R.drawable.polygon_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#D1C4E9"), PorterDuff.Mode.SRC_ATOP)
             }
             "AVAX"->{
-                ivIcon.setImageResource(R.drawable.avalanche_avax_logo)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#F8BBC0"), PorterDuff.Mode.SRC_ATOP)
             }
             "XRP"->{
-                ivIcon.setImageResource(R.drawable.xrp_icon)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#CFCFCF"), PorterDuff.Mode.SRC_ATOP)
             }
             "BUSD"->{
-                ivIcon.setImageResource(R.drawable.busd_coin)
+                ivIcon.getBackground().setColorFilter(Color.parseColor("#F0F4C3"), PorterDuff.Mode.SRC_ATOP)
             }
         }
     }

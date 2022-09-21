@@ -13,13 +13,13 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/image_with_corners"
-        android:backgroundTint="#FFCCBC"
+        android:backgroundTint="#F8BBC0"
         android:padding="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cl_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bitcoin_icon" />
+        app:srcCompat="@drawable/litecoin_icon" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_data"
