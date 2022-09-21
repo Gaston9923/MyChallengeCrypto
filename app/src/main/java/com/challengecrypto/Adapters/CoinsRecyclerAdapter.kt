@@ -3,7 +3,7 @@ package com.challengecrypto.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.challengecrypto.CoinsController
+import com.challengecrypto.Controllers.CoinsController
 import com.challengecrypto.R
 
 class CoinsRecyclerAdapter(coinsController: CoinsController): RecyclerView.Adapter<CoinViewHolder>() {

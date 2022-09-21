@@ -1,9 +1,9 @@
-package com.challengecrypto
+package com.challengecrypto.Controllers
 
-import com.challengecrypto.Fragments.HomeFragment
 import com.challengecrypto.Models.CoinCrypto
+import com.challengecrypto.R
 
-class CoinsController(homeFragment: HomeFragment) {
+class CoinsController() {
     var listCoins = mutableListOf<CoinCrypto>(
         CoinCrypto(R.drawable.bitcoin_icon, "BTCUSDT", "Bitcoin", "", ""),
         CoinCrypto(R.drawable.ethereum_icon, "ETHUSDT", "Ethereum", "", ""),
@@ -24,9 +24,6 @@ class CoinsController(homeFragment: HomeFragment) {
     private val CCL = 200
 
 
-    public fun getDataCoins(): List<CoinCrypto> {
-        return listCoins
-    }
 
     fun updateSymbol(position: Int) {
         count = 0
@@ -44,7 +41,7 @@ class CoinsController(homeFragment: HomeFragment) {
         }
     }
 
-    fun updateSymbols(coin: CoinCrypto) {
+    fun resumeSymbols(coin: CoinCrypto) {
         if (!symbolsUpdated) {
             when (coin.symbol) {
                 "BTCBUSD" -> {
@@ -82,64 +79,64 @@ class CoinsController(homeFragment: HomeFragment) {
     }
 
     fun updateListCoin(coin: CoinCrypto, countryArg: Boolean) {
-        updateSymbols(coin)
+        resumeSymbols(coin)
         var price:Double = coin.price.toDouble()
         if (countryArg){
-            price *= CCL
+            if (coin.symbol != "BUSDUSDT"){
+                price *= CCL
+            }
             val roundOff = String.format("%.4f",price)
+            coin.price = roundOff
+        }else{
+            if (coin.symbol == "BUSDUSDT"){
+                price *= CCL
+            }
+            val roundOff = String.format("%.2f",price)
             coin.price = roundOff
         }
 
-//        when(coin.symbol){
-//            "BUSDUSDT" -> {
-//                price = (( 1 / coin.price.toDouble() )*CCL)
-//                val roundOff = String.format("%.4f",price)
-//                price = roundOff.toDouble()
-//            }
-//            else -> {
-//                price = (coin.price.toDouble())
-//            }
-//        }
-        price = (coin.price.toDouble())
         when (coin.symbol) {
             "BTCBUSD" -> {
-                listCoins[0].price = price.toString()
+                listCoins[0].price = coin.price
                 listCoins[0].percentage = coin.percentage
             }
             "ETHBUSD" -> {
-                listCoins[1].price = price.toString()
+                listCoins[1].price = coin.price
                 listCoins[1].percentage = coin.percentage
             }
             "BNBBUSD" -> {
-                listCoins[2].price = price.toString()
+                listCoins[2].price = coin.price
                 listCoins[2].percentage = coin.percentage
             }
             "LUNABUSD" -> {
-                listCoins[3].price = price.toString()
+                listCoins[3].price = coin.price
                 listCoins[3].percentage = coin.percentage
             }
             "SOLBUSD" -> {
-                listCoins[4].price = price.toString()
+                listCoins[4].price = coin.price
                 listCoins[4].percentage = coin.percentage
             }
             "LTCBUSD" -> {
-                listCoins[5].price = price.toString()
+                listCoins[5].price = coin.price
                 listCoins[5].percentage = coin.percentage
             }
             "MATICBUSD" -> {
-                listCoins[6].price = price.toString()
+                listCoins[6].price = coin.price
                 listCoins[6].percentage = coin.percentage
             }
             "AVAXBUSD" -> {
-                listCoins[7].price = price.toString()
+                listCoins[7].price = coin.price
                 listCoins[7].percentage = coin.percentage
             }
             "XRPBUSD" -> {
-                listCoins[8].price = price.toString()
+                listCoins[8].price = coin.price
                 listCoins[8].percentage = coin.percentage
             }
             "BUSDUSDT" -> {
-                listCoins[9].price = ((1 / coin.price.toDouble())*200).toString()
+                price = ((1 / coin.price.toDouble())*200)
+                val roundOff = String.format("%.4f",price)
+                coin.price = roundOff
+                listCoins[9].price = coin.price
                 listCoins[9].percentage = coin.percentage
             }
 

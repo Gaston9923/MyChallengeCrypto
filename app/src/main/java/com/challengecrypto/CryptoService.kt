@@ -10,14 +10,10 @@ interface CryptoService {
 
     @GET("exchangeInfo")
     fun getExchangeInfo(): Call<ExchangeInfo>
-
     @GET("ticker/price")
     fun getPriceSymbols(): Call<List<SymbolCrypto>>
-
     @GET("capital/config/getall")
     fun getCoinInfo(): Call<String>
-
-
     @GET("ticker")
     fun get24hrPriceStatistics(@Query("symbol")symbol: String): Call<Ticker>
 

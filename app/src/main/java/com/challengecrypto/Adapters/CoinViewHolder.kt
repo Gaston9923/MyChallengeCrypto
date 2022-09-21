@@ -27,7 +27,7 @@ class CoinViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvPercentage.text = coin.percentage
         ivIcon.setImageResource(coin.icon)
 
-        setIconsCoin(coin)
+        setBackgroundIcon(coin)
         roundPercentageCoin(coin)
         }
 
@@ -46,7 +46,7 @@ class CoinViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun setIconsCoin(coin: CoinCrypto){
+    fun setBackgroundIcon(coin: CoinCrypto){
         when(coin.symbol){
             "BTC"->{
                 ivIcon.getBackground().setColorFilter(Color.parseColor("#FFCCBC"), PorterDuff.Mode.SRC_ATOP)

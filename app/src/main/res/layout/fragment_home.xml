@@ -29,6 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_cotizacion" />
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_coins"
         android:layout_width="match_parent"
@@ -43,6 +45,7 @@
         tools:listitem="@layout/crypto_container">
 
     </androidx.recyclerview.widget.RecyclerView>
+
 
     <ProgressBar
         android:id="@+id/progressBar"

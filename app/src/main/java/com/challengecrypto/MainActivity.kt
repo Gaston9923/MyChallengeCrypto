@@ -21,7 +21,6 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-
     @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,53 +53,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         }.attach()
-//
-//        getResponse()
-//        getDataApi()
-//        getPriceCrypto()
     }
 
 
 
-
-    private fun getCoinInfo(){
-        CryptoDbClient.service.getCoinInfo().enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                println("Call: "+call+"::  "+response.body().toString())
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                println("Error: $t")
-            }
-
-        })
-    }
-
-    private fun getDataApi(){
-        CryptoDbClient.service.getExchangeInfo().enqueue(object : Callback<ExchangeInfo>{
-            override fun onResponse(call: Call<ExchangeInfo>, response: Response<ExchangeInfo>) {
-                println(response.body().toString())
-            }
-
-            override fun onFailure(call: Call<ExchangeInfo>, t: Throwable) {
-                println("Error: $t")
-            }
-
-        })
-    }
-
-    private fun getPriceCrypto(){
-        CryptoDbClient.service.getPriceSymbols().enqueue(object : Callback<List<SymbolCrypto>>{
-            override fun onResponse(call: Call<List<SymbolCrypto>>, response: Response<List<SymbolCrypto>>) {
-                println("Response:"+response.body().toString())
-            }
-
-            override fun onFailure(call: Call<List<SymbolCrypto>>, t: Throwable) {
-                println("Error: $t")
-            }
-
-        })
-    }
 
 
 
