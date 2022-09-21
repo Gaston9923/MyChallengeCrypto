@@ -12,6 +12,7 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 import okio.ByteString
 import org.json.JSONObject
+import java.util.*
 
 
 class WSListener(homeFragment: HomeFragment) : WebSocketListener() {
@@ -29,25 +30,25 @@ class WSListener(homeFragment: HomeFragment) : WebSocketListener() {
 
     override fun onMessage(webSocket: WebSocket, text: String) {
         var jsn = JSONObject(text)
+        var price:String = ""
         var symbol = jsn.getString("s")
-        var price = jsn.getString("a")
+        price = jsn.getString("a")
+        if (symbol == "BUSDUSDT"){
+            price = jsn.getString("b")
+        }
         var percentage = jsn.getString("P")
-        println("Coin: "+symbol+" "+price+"-"+percentage)
+//        println("Coin: "+symbol+" "+price+"-"+percentage)
 
 //        var data = gson.fromJson(text,IndividualSymbol::class.java)
-        var coinCrypto = CoinCrypto(symbol,"",price,percentage)
+        var coinCrypto = CoinCrypto(R.drawable.bitcoin_icon,symbol,"",price,percentage)
         hf.updateCoins(coinCrypto)
-
-
-
-
 //        val gson = Gson()
 //        var coin = gson.fromJson(text, ResponseCoin::class.java)
 //        if (coin.s.equals("BTCUSDT")){
 //            var coinCrypto = CoinCrypto(coin.s,"Bitcoin",coin.c,"+9")
 //            hf.updateCoins(coinCrypto)
 //        }
-////        println("Coin: "+coin )
+        println("Coin: "+ coinCrypto.symbol + coinCrypto.price )
 //        println("Lista: "+text)
     }
 

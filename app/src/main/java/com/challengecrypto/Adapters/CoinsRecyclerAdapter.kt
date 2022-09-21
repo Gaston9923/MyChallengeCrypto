@@ -17,7 +17,7 @@ class CoinsRecyclerAdapter(coinsController: CoinsController): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: CoinViewHolder, position: Int) {
         val coin = listCoins[position]
-        holder.render(coin)
+        holder.render(coin, listCoins)
     }
 
     override fun getItemCount(): Int{
