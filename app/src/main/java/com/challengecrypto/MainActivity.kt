@@ -3,6 +3,7 @@ package com.challengecrypto
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.challengecrypto.Adapters.MyAdapter
